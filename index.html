@@ -4,9 +4,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <link rel="icon" href="./Pic/cat.png" type="image/x-icon">
+    <link rel="bookmark" href="./Pic/cat.png" type="image/x-icon">
+    <title>日期計算器</title>
+    <link rel="stylesheet" type="text/css" href="./Css/CssIndex.css">
 </head>
 <body>
-    12345
+    <form   method="GET" action="">
+        <!-- <input type="text" id="input1" name="input1"> -->
+        <label>日期</label>
+        <input type="date" name="date" id="date" value="">
+        <input type="button" value="確認" onclick="getSubtractDay()">
+        <br>
+        <label id="lb_date"></label>
+    </form>
 </body>
+<script src="./Js/appJs.js"></script>
 </html>

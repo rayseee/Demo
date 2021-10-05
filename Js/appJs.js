@@ -43,11 +43,17 @@ function randomgame(){
     guess=parseInt(guess);
     console.log(ans,guess);
     while(guess!=ans){
-         if(guess>=ans){max=guess;}
-         else if (guess<=ans){min=guess;}
-         count++;
         guess = prompt('請猜一個數字('+min+'~'+max+')');
         guess=parseInt(guess);
+        if(isNaN(guess))guess=0;
+        if(guess>100 ||guess<0){
+            //swal("不要亂猜!!");
+            console.log("不要亂猜!!");
+            continue;
+        }
+        else if(guess>=ans){max=guess;}
+        else if (guess<=ans){min=guess;}
+        count++;
         console.log(ans,guess);
         if(guess==ans)swal("你猜了"+count+"次");
     }

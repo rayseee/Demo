@@ -5,17 +5,27 @@ dTest.value=getToDay();
 let menu = document.getElementById('menu');
 let div1 = document.getElementById('dateCalculator');
 let div2 = document.getElementById('colorDiv');
+let div3 = document.getElementById('picDiv');
 let body = document.querySelector('body');
 
 function displaydiv1(){
     menu.style.display='none';
     div1.style.display='';
     div2.style.display='none';
+    div3.style.display='none';
 }
 function displaydiv2(){
     menu.style.display='none';
     div1.style.display='none';
     div2.style.display='';
+    div3.style.display='none';
+}
+function showPic(){
+    menu.style.display='none';
+    div1.style.display='none';
+    div2.style.display='none';
+    div3.style.display='';
+    
 }
 function blue(){
     body.style.backgroundColor='blue';

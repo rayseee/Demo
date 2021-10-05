@@ -1,6 +1,6 @@
-console.log("test");
+// console.log("test");
 let dTest = document.querySelector('input[type="date"]');
-console.log(dTest);
+// console.log(dTest);
 dTest.value=getToDay();
 
 let div1 = document.getElementById('dateCalculator');
@@ -32,6 +32,25 @@ function randomcolor(){
     console.log(r_rand,g_rand,b_rand);
     body.style.backgroundColor=rgb_color;
     
+    
+}
+function randomgame(){
+    let ans=Math.floor(Math.random()*101);
+    let min=0;
+    let max=100;
+    let guess = prompt('請猜一個數字(0~100)');
+    let count=0;
+    guess=parseInt(guess);
+    console.log(ans,guess);
+    while(guess!=ans){
+         if(guess>=ans){max=guess;}
+         else if (guess<=ans){min=guess;}
+         count++;
+        guess = prompt('請猜一個數字('+min+'~'+max+')');
+        guess=parseInt(guess);
+        console.log(ans,guess);
+        if(guess==ans)swal("你猜了"+count+"次");
+    }
     
 }
 function navbarClose(){

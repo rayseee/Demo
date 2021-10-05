@@ -3,6 +3,46 @@ let dTest = document.querySelector('input[type="date"]');
 console.log(dTest);
 dTest.value=getToDay();
 
+let div1 = document.getElementById('dateCalculator');
+let div2 = document.getElementById('colorDiv');
+let body = document.querySelector('body');
+
+function displaydiv1(){
+    div1.style.display='';
+    div2.style.display='none';
+}
+function displaydiv2(){
+    div1.style.display='none';
+    div2.style.display='';
+}
+function blue(){
+    body.style.backgroundColor='blue';
+}
+function red(){
+    body.style.backgroundColor='red';
+}
+function green(){
+    body.style.backgroundColor='green';
+}
+function randomcolor(){
+    let r_rand=Math.floor(Math.random()*255);
+    let g_rand=Math.floor(Math.random()*255);
+    let b_rand=Math.floor(Math.random()*255);
+    let rgb_color='rgb('+r_rand+','+g_rand+','+b_rand+')';
+    console.log(r_rand,g_rand,b_rand);
+    body.style.backgroundColor=rgb_color;
+    
+    
+}
+function navbarClose(){
+    let nav =document.getElementById('Nav_navbar');
+    if(nav.style.display==='none'){
+        nav.style.display='';
+    }
+    else{
+        nav.style.display='none';
+    }
+}
 function getToDay(){
     
     // document.write("今天日期是 " + Today.getFullYear()+ " 年 " + (Today.getMonth()+1) + " 月 " + Today.getDate() + " 日");
@@ -35,5 +75,5 @@ function getSubtractDay(){
     
 
     var lb_d=document.getElementById('lb_date');
-    lb_d.innerText="相差天數:"+days;
+    lb_d.innerText="與今天相差天數:"+days+"天";
 }

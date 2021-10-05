@@ -2,16 +2,18 @@
 let dTest = document.querySelector('input[type="date"]');
 // console.log(dTest);
 dTest.value=getToDay();
-
+let menu = document.getElementById('menu');
 let div1 = document.getElementById('dateCalculator');
 let div2 = document.getElementById('colorDiv');
 let body = document.querySelector('body');
 
 function displaydiv1(){
+    menu.style.display='none';
     div1.style.display='';
     div2.style.display='none';
 }
 function displaydiv2(){
+    menu.style.display='none';
     div1.style.display='none';
     div2.style.display='';
 }
@@ -39,11 +41,13 @@ function randomgame(){
     let min=0;
     let max=100;
     let guess = prompt('請猜一個數字(0~100)');
+    if(!guess)return;
     let count=0;
     guess=parseInt(guess);
     console.log(ans,guess);
     while(guess!=ans){
         guess = prompt('請猜一個數字('+min+'~'+max+')');
+        if(!guess)break;
         guess=parseInt(guess);
         if(isNaN(guess))guess=0;
         if(guess>100 ||guess<0){
@@ -55,7 +59,7 @@ function randomgame(){
         else if (guess<=ans){min=guess;}
         count++;
         console.log(ans,guess);
-        if(guess==ans)swal("你猜了"+count+"次");
+        if(guess==ans)swal("你猜了"+count+"次,答案就是"+ans);
     }
     
 }

@@ -8,25 +8,20 @@ let div2 = document.getElementById('colorDiv');
 let div3 = document.getElementById('picDiv');
 let body = document.querySelector('body');
 
-function displaydiv1(){
+let jqDiv=$(".divv");
+jqDiv.hide();
+
+function showDiv(D_id){
     menu.style.display='none';
-    div1.style.display='';
-    div2.style.display='none';
-    div3.style.display='none';
+    jqDiv.hide();
+    jqDiv[D_id].style.display='';
 }
-function displaydiv2(){
-    menu.style.display='none';
-    div1.style.display='none';
-    div2.style.display='';
-    div3.style.display='none';
-}
-function showPic(){
-    menu.style.display='none';
-    div1.style.display='none';
-    div2.style.display='none';
-    div3.style.display='';
-    
-}
+
+
+
+
+
+
 function blue(){
     body.style.backgroundColor='blue';
 }
@@ -43,8 +38,6 @@ function randomcolor(){
     let rgb_color='rgb('+r_rand+','+g_rand+','+b_rand+')';
     console.log(r_rand,g_rand,b_rand);
     body.style.backgroundColor=rgb_color;
-    
-    
 }
 function randomgame(){
     let ans=Math.floor(Math.random()*101);

@@ -1,11 +1,10 @@
 // console.log("test");
 let dTest = document.querySelector('input[type="date"]');
 // console.log(dTest);
+// 將今日日期填入date
 dTest.value=getToDay();
+
 let menu = document.getElementById('menu');
-let div1 = document.getElementById('dateCalculator');
-let div2 = document.getElementById('colorDiv');
-let div3 = document.getElementById('picDiv');
 let body = document.querySelector('body');
 
 let jqDiv=$(".divv");
@@ -16,21 +15,10 @@ function showDiv(D_id){
     jqDiv.hide();
     jqDiv[D_id].style.display='';
 }
-
-
-
-
-
-
-function blue(){
-    body.style.backgroundColor='blue';
+function changeBGColor(colorName){
+    body.style.backgroundColor=colorName;
 }
-function red(){
-    body.style.backgroundColor='red';
-}
-function green(){
-    body.style.backgroundColor='green';
-}
+
 function randomcolor(){
     let r_rand=Math.floor(Math.random()*255);
     let g_rand=Math.floor(Math.random()*255);
@@ -64,6 +52,44 @@ function randomgame(){
         console.log(ans,guess);
         if(guess==ans)swal("你猜了"+count+"次,答案就是"+ans);
     }
+    
+}
+let g1_ans=Math.floor(Math.random()*101);
+let g1_count=0;
+let g1_min=0;
+let g1_max=100;
+function randomgameInput(guess){
+    
+    if(!guess)return;
+    
+        guess=parseInt(guess);
+        if(isNaN(guess))guess=0;
+        if(guess>100 ||guess<0){
+            //swal("不要亂猜!!");
+            console.log("不要亂猜!!");
+            $('#lb_game1').text("不要亂猜!!");
+        }
+        else if(guess>=g1_ans){
+            g1_max=guess;
+            $('#lb_game1').text("請猜一個數字("+g1_min+"~"+g1_max+")");
+        }
+        else if (guess<=g1_ans){
+            g1_min=guess;
+            $('#lb_game1').text("請猜一個數字("+g1_min+"~"+g1_max+")");
+        }
+        
+        g1_count++;
+        console.log(g1_ans,guess);
+
+        if(guess==g1_ans){
+            swal("你猜了"+g1_count+"次,答案就是"+g1_ans);
+            g1_ans=Math.floor(Math.random()*101);
+            g1_count=0;
+            g1_min=0;
+            g1_max=100;
+            $('#game1').val(0);
+            $('#lb_game1').text("");
+        }
     
 }
 function navbarClose(){

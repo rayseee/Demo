@@ -12,19 +12,41 @@ let body = document.querySelector('body');
 //----------------
 let jqDiv=$(".divv");
 jqDiv.hide();
-
+    
 //----------------
 // 觸發事件 區域 
 //----------------
-$('#game1').keypress(function (event) {
-    if (event.which === 13){
-        randomgameInput($('#game1').val())
-    }
+$(document).ready(function(){
+    $('#p1').html('1. 距離11/19 剩'+getSubtractDay('2021-11-19')+'天');
+    $('#p2').html('2. 距離12/24 剩'+getSubtractDay('2021-12-24')+'天');
+    //歸零days
+    getSubtractDay(getToDay());
+
+    $('#game1').keypress(function (event) {
+        if (event.which === 13){
+            randomgameInput($('#game1').val())
+        }
+    });
+    $('#date').on('change',function(){
+        $('#ul_dateinfo').append('<li>'+getSubtractDay($('#date').val())+'天');
+    });
+    $('#bt_date').on('click',function(){
+        $('#ul_dateinfo').html('');
+    });
+    //回首頁暫時用法
+    $('#a_home').on('click',function(){
+        window.location = './index.html';
+    });
+
+    //測拉導航測試
+    const $menu = $('#navbarToggleExternalContent');
+    $menu.on('show.bs.collapse', function () {
+    $menu.addClass('menu-show');
+    });
+    $menu.on('hide.bs.collapse', function () {
+    $menu.removeClass('menu-show');
+    });
 });
-
-
-//$('#date').bind('change',getSubtractDay());
-
 //----------------
 // fuc 區域 
 //----------------
@@ -44,7 +66,6 @@ function randomcolor(){
     console.log(r_rand,g_rand,b_rand);
     body.style.backgroundColor=rgb_color;
 }
-
 function randomgame(){
     let ans=Math.floor(Math.random()*101);
     let min=0;
@@ -124,10 +145,6 @@ function navbarClose(){
     }
 }
 function getToDay(){
-    
-    // document.write("今天日期是 " + Today.getFullYear()+ " 年 " + (Today.getMonth()+1) + " 月 " + Today.getDate() + " 日");
-    // console.log((Today.getFullYear()+"-"+(Today.getMonth()+1)+"-"+Today.getDate()));
-    // rDate=(Today.getFullYear()+"-"+(Today.getMonth()+1)+"-"+Today.getDate());
     var Today  = new Date();
     var yyyy = Today .getFullYear().toString();
     var mm = (Today.getMonth()+1).toString();
@@ -135,21 +152,16 @@ function getToDay(){
     var thisDate = yyyy+"-"+(mm[1] ? mm : "0"+mm[0])+"-"+(dd[1] ? dd  : "0" +dd[0]) ;   
     return thisDate;
 }
-function getSubtractDay(){
-
+function getSubtractDay(dTest){
     var thisDate = getToDay();
-    var dTest = document.querySelector('input[type="date"]');
-    // var day1 = new Date("08/25/2020"); 
     var tDay=new Date(thisDate);
-    var sDay=new Date(dTest.value);
+    var sDay=new Date(dTest);
     console.log("sDay"+sDay);
     console.log("TDay"+tDay);
-    
     var difference= Math.abs(sDay-tDay);
     days = difference/(1000 * 3600 * 24)
     console.log(days);
-    
-
     var lb_d=document.getElementById('lb_date');
     lb_d.innerText="與今天相差天數:"+days+"天";
+    return days;
 }

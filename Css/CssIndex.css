@@ -1,16 +1,31 @@
 *{
-    font-family:'Courier New', Courier, monospace;
+    font-family: Microsoft JhengHei;
     font-size: 1.2rem;
 }
 /* body{
     background-color: rgb(red, green, blue);
 } */
 h1{
-    color: seagreen;
+    color:brown;
 }
 #lb_menu{
    color: saddlebrown;
 }
 .divv{
     margin:10px;
+}
+p{
+    color:steelblue;
+}
+
+#navbarToggleExternalContent{
+    transform: translateX(-100%);
+    transition: transform .35s ease;
+    display: block;
+    height: 100%;
+    min-height: 100%;
+}
+
+#navbarToggleExternalContent.menu-show{
+    transform: translateX(0%);
 }

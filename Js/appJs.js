@@ -40,12 +40,10 @@ $(document).ready(function(){
 
     //測拉導航測試
     const $menu = $('#navbarToggleExternalContent');
-    $menu.on('show.bs.collapse', function () {
-    $menu.addClass('menu-show');
-    });
-    $menu.on('hide.bs.collapse', function () {
-    $menu.removeClass('menu-show');
-    });
+    const $bd = $('#bd');
+    $menu.on('show.bs.collapse', function () {$menu.addClass('menu-show');});
+    $menu.on('hide.bs.collapse', function () {$menu.removeClass('menu-show');});
+    $menu.on('click',function () {$menu.removeClass('menu-show');});
 });
 //----------------
 // fuc 區域 

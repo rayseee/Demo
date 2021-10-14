@@ -7,7 +7,7 @@
 
     <link rel="icon" href="./Pic/cat.png" type="image/x-icon">
     <link rel="bookmark" href="./Pic/cat.png" type="image/x-icon">
-    <title>日期計算器</title>
+    <title>測試網站</title>
     <link rel="stylesheet" type="text/css" href="./Css/CssIndex.css">
     <!-- font awesome cdn (圖片引用)-->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
@@ -33,7 +33,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" onclick="showDiv(0);">日期計算器</a>
-                            <a class="dropdown-item" onclick="showDiv(1);;">Div測試</a>
+                            <a class="dropdown-item" onclick="showDiv(1);">Div測試</a>
                         </div>
                     </li>
 					<!-- <a class="nav-link active" onclick="randomgame();"><i class="fas fa-palette"></i> 遊戲</a> -->
@@ -50,7 +50,7 @@
             <label id="lb_menu">請點功能項目選擇功能</label>
             <hr>
             <p>
-                1.目前沒啥屁用
+                1.待新增
                 <br>
                 2.
             </p>
@@ -59,7 +59,7 @@
     <div class="container divv" id="dateCalculator">
         <div class="jumbotron p-4">
             <label>日期計算器</label>
-            <input type="date" name="date" id="date" value="">
+            <input type="date" name="date" id="date" value="" onchange="getSubtractDay()">
             <input type="button" value="確認" onclick="getSubtractDay()">
             <br>
             <label id="lb_date"></label>

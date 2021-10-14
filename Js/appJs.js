@@ -7,9 +7,27 @@ dTest.value=getToDay();
 let menu = document.getElementById('menu');
 let body = document.querySelector('body');
 
+//----------------
+// autoRun 區域 
+//----------------
 let jqDiv=$(".divv");
 jqDiv.hide();
 
+//----------------
+// 觸發事件 區域 
+//----------------
+$('#game1').keypress(function (event) {
+    if (event.which === 13){
+        randomgameInput($('#game1').val())
+    }
+});
+
+
+//$('#date').bind('change',getSubtractDay());
+
+//----------------
+// fuc 區域 
+//----------------
 function showDiv(D_id){
     menu.style.display='none';
     jqDiv.hide();
@@ -18,7 +36,6 @@ function showDiv(D_id){
 function changeBGColor(colorName){
     body.style.backgroundColor=colorName;
 }
-
 function randomcolor(){
     let r_rand=Math.floor(Math.random()*255);
     let g_rand=Math.floor(Math.random()*255);
@@ -27,6 +44,7 @@ function randomcolor(){
     console.log(r_rand,g_rand,b_rand);
     body.style.backgroundColor=rgb_color;
 }
+
 function randomgame(){
     let ans=Math.floor(Math.random()*101);
     let min=0;
@@ -54,6 +72,9 @@ function randomgame(){
     }
     
 }
+//----------------
+//  randomgameInput 全域變數 
+//----------------
 let g1_ans=Math.floor(Math.random()*101);
 let g1_count=0;
 let g1_min=0;
@@ -61,9 +82,12 @@ let g1_max=100;
 function randomgameInput(guess){
     
     if(!guess)return;
-    
+        g1_count++;
         guess=parseInt(guess);
-        if(isNaN(guess))guess=0;
+        if(isNaN(guess)){
+            guess=0;
+            $('#lb_game1').text("不要亂猜!!");
+        }
         if(guess>100 ||guess<0){
             //swal("不要亂猜!!");
             console.log("不要亂猜!!");
@@ -71,14 +95,12 @@ function randomgameInput(guess){
         }
         else if(guess>=g1_ans){
             g1_max=guess;
-            $('#lb_game1').text("請猜一個數字("+g1_min+"~"+g1_max+")");
+            $('#lb_game1').text("請猜一個數字("+g1_min+"~"+g1_max+")，目前猜了"+g1_count+"次。");
         }
         else if (guess<=g1_ans){
             g1_min=guess;
-            $('#lb_game1').text("請猜一個數字("+g1_min+"~"+g1_max+")");
+            $('#lb_game1').text("請猜一個數字("+g1_min+"~"+g1_max+")，目前猜了"+g1_count+"次。");
         }
-        
-        g1_count++;
         console.log(g1_ans,guess);
 
         if(guess==g1_ans){
@@ -114,12 +136,8 @@ function getToDay(){
     return thisDate;
 }
 function getSubtractDay(){
-    var Today  = new Date();
-    var yyyy = Today .getFullYear().toString();
-    var mm = (Today.getMonth()+1).toString();
-    var dd = Today.getDate().toString();
-    var thisDate = yyyy+"-"+(mm[1] ? mm : "0"+mm[0])+"-"+(dd[1] ? dd  : "0" +dd[0]) ;
 
+    var thisDate = getToDay();
     var dTest = document.querySelector('input[type="date"]');
     // var day1 = new Date("08/25/2020"); 
     var tDay=new Date(thisDate);

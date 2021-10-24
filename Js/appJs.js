@@ -1,4 +1,3 @@
-// console.log("test");
 let dTest = document.querySelector('input[type="date"]');
 // console.log(dTest);
 // 將今日日期填入date
@@ -19,6 +18,13 @@ jqDiv.hide();
 $(document).ready(function(){
     $('#p1').html('1. 距離11/19 剩'+getSubtractDay('2021-11-19')+'天');
     $('#p2').html('2. 距離12/24 剩'+getSubtractDay('2021-12-24')+'天');
+    $('#p3').html('<br>'+
+                    '🎉4/14已過'+getSubtractDay('2021-04-14')+'天<br>'+
+                    '');
+    // $('#p3').html('3. 距離12/24 剩'+getSubtractDay('2021-12-24')+'天');
+    // $('#p4').html('4. 距離12/24 剩'+getSubtractDay('2021-12-24')+'天');
+    // $('#p5').html('5. 距離12/24 剩'+getSubtractDay('2021-12-24')+'天');
+
     //歸零days
     getSubtractDay(getToDay());
 
@@ -27,15 +33,22 @@ $(document).ready(function(){
             randomgameInput($('#game1').val())
         }
     });
+
     $('#date').on('change',function(){
-        $('#ul_dateinfo').append('<li>'+getSubtractDay($('#date').val())+'天');
+        $('#ul_dateinfo').append('<li>'+$('#date').val()+'與今日相差'+getSubtractDay($('#date').val())+'天');
     });
+    // 清除date ul
     $('#bt_date').on('click',function(){
         $('#ul_dateinfo').html('');
     });
-    //回首頁暫時用法
+    // 回首頁暫時用法
     $('#a_home').on('click',function(){
         window.location = './index.html';
+    });
+    // 燈箱
+    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+        event.preventDefault();
+        $(this).ekkoLightbox();
     });
 
     //測拉導航測試
@@ -63,6 +76,78 @@ function randomcolor(){
     let rgb_color='rgb('+r_rand+','+g_rand+','+b_rand+')';
     console.log(r_rand,g_rand,b_rand);
     body.style.backgroundColor=rgb_color;
+}
+//----------------
+//  randomcolor1 全域變數 
+//----------------
+let intervalID;
+function randomcolor1(){
+    
+    if($('#randomcolor1').html()=='連續隨機')
+    {   
+        intervalID = setInterval(function() {
+            randomcolor();
+        }, 1000);
+        console.log(intervalID);
+        $('#randomcolor1').html('連續隨機(開)');
+    }
+    else if($('#randomcolor1').html()=='連續隨機(開)'){
+        clearInterval(intervalID);
+        console.log('clear'+intervalID);
+        $('#randomcolor1').html('連續隨機');
+    }
+}
+// c顏色 f旗標
+let r_c=0;
+let r_f=0;
+let g_c=0;
+let g_f=0;
+let b_c=0;
+let b_f=0;
+function color1(){
+    
+    if($('#color1').html()=='連續')
+    {   
+        intervalID = setInterval(function() {
+            body.style.backgroundColor='rgb('+r_c+','+g_c+','+b_c+')';
+            if(r_c<=255 && r_f==0){ 
+                r_c++;
+                if(r_c>255)r_f=1;
+            }
+            else if(r_f==1) {
+                if(r_c==0)r_f=0;
+                r_c--;
+                if(g_c<=255 && g_f==0){
+                    g_c++;
+                    if(g_c>255)g_f=1;
+                }
+                else if(g_f==1) {
+                    if(g_c==0)g_f=0;
+                    g_c--;
+                    if(b_c<=255 && b_f==0){
+                        b_c++;
+                        if(b_c>255)b_f=1;
+                    }
+                    else if(b_f==1) {
+                        if(b_c==0)b_f=0;
+                        b_c--;
+                    }
+                }
+                
+            }
+            //console.log(r_c,g_c,b_c);
+        }, 15);
+        console.log(intervalID);
+        $('#color1').html('連續(開)');
+    }
+    else if($('#color1').html()=='連續(開)'){
+        r_c=0;
+        g_c=0;
+        b_c=0;
+        clearInterval(intervalID);
+        console.log('clear'+intervalID);
+        $('#color1').html('連續');
+    }
 }
 function randomgame(){
     let ans=Math.floor(Math.random()*101);

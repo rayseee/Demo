@@ -84,7 +84,8 @@ let intervalID;
 function randomcolor1(){
     
     if($('#randomcolor1').html()=='連續隨機')
-    {   
+    {   clearInterval(intervalID);
+        console.log('init_clear'+intervalID);
         intervalID = setInterval(function() {
             randomcolor();
         }, 1000);
@@ -94,6 +95,7 @@ function randomcolor1(){
     else if($('#randomcolor1').html()=='連續隨機(開)'){
         clearInterval(intervalID);
         console.log('clear'+intervalID);
+        intervalID=null;
         $('#randomcolor1').html('連續隨機');
     }
 }
@@ -104,39 +106,89 @@ let g_c=0;
 let g_f=0;
 let b_c=0;
 let b_f=0;
+let t_f=0;
 function color1(){
     
     if($('#color1').html()=='連續')
-    {   
+    {   clearInterval(intervalID);
+        r_c=0;
+        r_f=0;
+        g_c=0;
+        g_f=0;
+        b_c=0;
+        b_f=0;
+        t_f=0;
+        console.log('init_clear'+intervalID);
         intervalID = setInterval(function() {
             body.style.backgroundColor='rgb('+r_c+','+g_c+','+b_c+')';
-            if(r_c<=255 && r_f==0){ 
+            //原code
+
+            if(r_c<=255 && r_f==0 && t_f==0){ 
                 r_c++;
-                if(r_c>255)r_f=1;
+                if(r_c>=255)r_f=1;
             }
             else if(r_f==1) {
-                if(r_c==0)r_f=0;
+                if(r_c==1){r_f=0;}
                 r_c--;
-                if(g_c<=255 && g_f==0){
+                t_f=1;
+                if(g_c<=255 && g_f==0 && t_f==1){
                     g_c++;
-                    if(g_c>255)g_f=1;
+                    if(g_c>=255)g_f=1;
                 }
                 else if(g_f==1) {
-                    if(g_c==0)g_f=0;
+                    if(g_c==1){g_f=0;}
                     g_c--;
-                    if(b_c<=255 && b_f==0){
+                    t_f=2;
+                    if(b_c<=255 && b_f==0 && t_f==2){
                         b_c++;
-                        if(b_c>255)b_f=1;
+                        if(b_c>=255)b_f=1;
                     }
                     else if(b_f==1) {
-                        if(b_c==0)b_f=0;
+                        if(b_c==1){b_f=0;}
                         b_c--;
+                        t_f=0;
                     }
                 }
-                
             }
-            //console.log(r_c,g_c,b_c);
-        }, 15);
+            else if(r_c==0 && r_f ==0){
+                if(g_c<=255 && g_f==0 && t_f==1){
+                    g_c++;
+                    if(g_c>=255)g_f=1;
+                }
+                else if(g_f==1) {
+                    if(g_c==1){g_f=0;}
+                    g_c--;
+                    t_f=2;
+                    if(b_c<=255 && b_f==0 && t_f==2){
+                        b_c++;
+                        if(b_c>=255)b_f=1;
+                    }
+                    else if(b_f==1) {
+                        if(b_c==1){b_f=0;}
+                        b_c--;
+                        t_f=0;
+                    }
+                }
+            }
+
+
+            if(r_c==0 && r_f ==0 && g_c==0 && g_f==0){
+                
+                if(b_c<=255 && b_f==0 && t_f==2){
+                        b_c++;
+                        if(b_c>=255)b_f=1;
+                    }
+                    else if(b_f==1) {
+                        if(b_c==1){b_f=0;}
+                        b_c--;
+                        if(b_c==0){
+                            t_f=0;
+                            console.log("reset");
+                        }
+                    }
+            }
+            console.log(r_c,r_f,g_c,g_f,b_c,b_f,t_f);
+        }, 1);
         console.log(intervalID);
         $('#color1').html('連續(開)');
     }
@@ -166,7 +218,7 @@ function randomgame(){
         if(guess>100 ||guess<0){
             //swal("不要亂猜!!");
             console.log("不要亂猜!!");
-            continue;
+            return;
         }
         else if(guess>=ans){max=guess;}
         else if (guess<=ans){min=guess;}

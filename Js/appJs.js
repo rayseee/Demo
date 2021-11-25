@@ -16,11 +16,16 @@ jqDiv.hide();
 // 觸發事件 區域 
 //----------------
 $(document).ready(function(){
-    $('#p1').html('1. 距離11/19 剩'+getSubtractDay('2021-11-19')+'天');
-    $('#p2').html('2. 距離12/24 剩'+getSubtractDay('2021-12-24')+'天');
-    $('#p3').html('<br>'+
-                    '🎉4/14已過'+getSubtractDay('2021-04-14')+'天<br>'+
-                    '');
+    $('#p1').html('1. 110/10/03建立Demo 已過 '+(-getSubtractDay('2021-10-03'))+'天');
+
+    if(getSubtractDay('2021-12-24')<0){//大於零 代表未來日期
+        $('#p2').html('2. 距離12/24 已過'+(-getSubtractDay('2021-12-24'))+'天');
+    }else{
+        $('#p2').html('2. 距離12/24 相差'+getSubtractDay('2021-12-24')+'天');
+
+    }
+    
+    $('#p3').html('<br>'+'🎉4/14已過'+(-getSubtractDay('2021-04-14'))+'天<br>'+'');
     // $('#p3').html('3. 距離12/24 剩'+getSubtractDay('2021-12-24')+'天');
     // $('#p4').html('4. 距離12/24 剩'+getSubtractDay('2021-12-24')+'天');
     // $('#p5').html('5. 距離12/24 剩'+getSubtractDay('2021-12-24')+'天');
@@ -291,12 +296,16 @@ function getSubtractDay(dTest){
     var thisDate = getToDay();
     var tDay=new Date(thisDate);
     var sDay=new Date(dTest);
-    console.log("sDay"+sDay);
-    console.log("TDay"+tDay);
+    var f=0;//秀出 已經過日期 負號註記
+    console.log("sDay "+sDay);
+    console.log("TDay "+tDay);
     var difference= Math.abs(sDay-tDay);
+    if((sDay-tDay)>0){f=1;}
+    else{f=0;}
     days = difference/(1000 * 3600 * 24)
     console.log(days);
     var lb_d=document.getElementById('lb_date');
     lb_d.innerText="與今天相差天數:"+days+"天";
-    return days;
+    if(f==0){return (-days);}
+    else{return days;}
 }

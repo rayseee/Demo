@@ -11,7 +11,53 @@ let body = document.querySelector("body");
 //----------------
 let jqDiv = $(".divv");
 jqDiv.hide();
-
+//----------------
+// ChartData 區域
+//----------------
+let IntN=7;
+var lineChartData = {
+    labels: [IntN, IntN*2, IntN*3, IntN*4, IntN*5, IntN*6, IntN*7, IntN*8, IntN*9], //顯示區間名稱
+    datasets: [{
+        label: '預期', // tootip 出現的名稱
+        lineTension: 0, // 曲線的彎度，設0 表示直線
+        backgroundColor: "#ea464f",
+        borderColor: "#ea464f",
+        borderWidth: 5,
+        data: [84, 83.5, 83, 82.5, 82, 81.5, 81, 80.5, 80], // 資料
+        fill: false, // 是否填滿色彩
+    }, {
+        label: '實際',
+        lineTension: 0,
+        fill: false,
+        backgroundColor: "#29b2ff",
+        borderColor: "#29b2ff",
+        borderWidth: 5,
+        data: [84, 84.3, 83.8, 82.7, 82, 82.3, 84, 83, 82.7],
+    },]
+};
+function drawLineCanvas(ctx,data) {
+    window.myLine = new Chart(ctx, {  //先建立一個 chart
+        type: 'line', // 型態
+        data: data,
+        options: {
+                responsive: true,
+                legend: { //是否要顯示圖示
+                    display: true,
+                },
+                tooltips: { //是否要顯示 tooltip
+                    enabled: true
+                },
+                scales: {  //是否要顯示 x、y 軸
+                    xAxes: [{
+                        display: true
+                    }],
+                    yAxes: [{
+                        display: true
+                    }]
+                },
+            }
+    });
+};
 //----------------
 // 觸發事件 區域
 //----------------
@@ -19,8 +65,6 @@ $(document).ready(function () {
     var p1_Date = "2021-10-03";
     var p1_lebal = "1. "+p1_Date+" 建立 Demo 已過 " + -getSubtractDay(p1_Date) + "天";
     var p2_Date = "2021-12-27";
-    
-
     var if0=" 相差 ";
     var if1=" 已過 ";
     $("#p1").html(p1_lebal);
@@ -80,6 +124,9 @@ $(document).ready(function () {
     $menu.on("click", function () {
         $menuButton.click();
     });
+    
+    var ctx = document.getElementById("canvas").getContext("2d");
+    drawLineCanvas(ctx,lineChartData);
 });
 //----------------
 // fuc 區域

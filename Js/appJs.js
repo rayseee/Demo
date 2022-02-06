@@ -69,10 +69,10 @@ $(document).ready(function () {
     var if1=" 已過 ";
     $("#p1").html(p1_lebal);
 
-    if (getSubtractDay(p2_Date) < 0) //大於零 代表未來日期
-        $("#p2").html(p2_lebal(if1,p2_Date,1));//1會加負號 (已過)
-    else 
-        $("#p2").html(p2_lebal(if0,p2_Date,0));
+    // if (getSubtractDay(p2_Date) < 0) //大於零 代表未來日期
+    //     $("#p2").html(p2_lebal(if1,p2_Date,1));//1會加負號 (已過)
+    // else 
+    //     $("#p2").html(p2_lebal(if0,p2_Date,0));
     
 
     $("#p3").html("<br>" + "🎉2021-04-14 已過 " + -getSubtractDay("2021-04-14") + "天<br>" + "");

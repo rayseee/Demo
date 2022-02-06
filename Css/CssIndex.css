@@ -28,3 +28,7 @@ p{
 #navbarToggleExternalContent.menu-show{
     transform: translateX(0%);
 }
+.googleIframe{
+    min-width: 400px;
+    min-height: 600px;
+}
